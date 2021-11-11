@@ -31,7 +31,12 @@ class AppListML:
         """获取特征"""
         df = pd.DataFrame(data['app_list'])
         df['apply_time'] = data['apply_time']
-        df['apply_time'] = pd.to_datetime(df['apply_time'])
+        try:
+            df['apply_time'] = pd.to_datetime(df['apply_time'])
+        except:
+            logging.error(f"申请时间戳转换错误:{data['apply_time']}")
+            df['apply_time'] = datetime.now()
+
         df['lastTime'] = pd.to_datetime(df['lastTime'])
         self_df = df[df.lastTime > datetime(2010, 1, 1)]
         day_tag = pd.DataFrame(pd.cut((self_df['apply_time'] - self_df['lastTime']).dt.days,
