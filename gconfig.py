@@ -6,7 +6,7 @@
 # @Desc: 生产配置
 
 import multiprocessing
-bind = '0.0.0.0:8005'  # Nginx监听 8005 并转发给 8004
+bind = '0.0.0.0:8004'  # Nginx监听 8005 并转发给 8004
 timeout = 60      #超时
 worker_class = 'uvicorn.workers.UvicornWorker' #使用,uvicornt模式，备选模式: geven, sync
 
